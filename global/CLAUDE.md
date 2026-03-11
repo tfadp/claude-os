@@ -78,3 +78,9 @@ Involves a refactor or schema change
 
 To activate: press Shift+Tab twice in Claude Code, or prefix your prompt with:
 "Before writing any code, enter Plan Mode and map out every file and function you'll touch. Present the plan and wait for my approval."
+
+## Context Management
+- For any task touching 3+ files, spawn a subagent with only the
+  relevant SPECS section and those files loaded. Do not carry
+  accumulated session context into implementation work.
+- Main session is for decisions and direction. Subagents are for execution.
