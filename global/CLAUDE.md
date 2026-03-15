@@ -79,6 +79,22 @@ Involves a refactor or schema change
 To activate: press Shift+Tab twice in Claude Code, or prefix your prompt with:
 "Before writing any code, enter Plan Mode and map out every file and function you'll touch. Present the plan and wait for my approval."
 
+## Failure Protocol
+
+If a task is not working after 2 attempts, STOP. Do not keep trying.
+
+Instead:
+1. State exactly what you tried
+2. Show the error or unexpected output (copy it verbatim)
+3. Give your best hypothesis for the root cause
+4. Wait for my input before proceeding
+
+Do NOT:
+- Silently try a third approach
+- Refactor around the problem
+- Assume the problem is somewhere else and start changing other files
+- If the error involves a file I told you not to modify, stop immediately and flag it
+
 ## Context Management
 - For any task touching 3+ files, spawn a subagent with only the
   relevant SPECS section and those files loaded. Do not carry
