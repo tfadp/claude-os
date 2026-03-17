@@ -30,13 +30,23 @@ Only after I confirm your understanding do you proceed to Path A/B.
 - Flag assumptions explicitly before acting on them.
 - Do not install new dependencies without presenting Path A / Path B.
 
-## Self-Score Before Done
-Before marking any task complete, score your work 1-10 on:
-- Spec alignment (matches SPECS.md exactly)
-- Edge case coverage
-- Naming consistency
-Any dimension below 8 must be resolved before declaring done.
-Report the scores to me explicitly.
+## Self-Score Before Done (Two-Stage)
+Do not declare a task complete until both gates pass sequentially.
+
+**Gate 1 — Spec Compliance** (did we build what we said?)
+- Does output match the plan/spec exactly?
+- Are all required files touched and only those files?
+- Score 1–10. Below 8: fix before proceeding to Gate 2.
+
+**Gate 2 — Code Quality** (is it written well?)
+- Naming consistency, edge cases handled, no lazy logic shortcuts.
+- A staff engineer would approve this without changes.
+- Score 1–10. Below 8: resolve before declaring done.
+
+These are sequential. Never merge the two gates into one pass.
+Report both scores to me explicitly.
+If a fix feels hacky, prompt yourself: "Knowing everything I know now,
+implement the elegant solution." Skip this only for trivial one-line fixes.
 
 ## Proactive Exception Handling
 - If you detect a naming convention violation while writing code, STOP and flag it
@@ -60,7 +70,7 @@ Report the scores to me explicitly.
   Three separate incidents where code was committed but not deployed, or deployed but would
   have crashed at runtime. Measure twice, cut once.
 
-8) Prompt Formula (use for every non-trivial request)
+## Prompt Formula (use for every non-trivial request)
 Structure requests as:
 
 WHAT: the concrete deliverable
@@ -74,18 +84,45 @@ WHERE: src/components/LoginForm.tsx
 HOW: reject empty strings and non-email formats, show inline error
 VERIFY: submitting empty email shows "Email required" below the field
 
-9) Plan Mode — use before risky changes
+## Plan Mode
 Trigger Plan Mode (read-only exploration) before any task that:
-
-Touches naming conventions or data shapes in SPECS.md
-Affects more than 3 files
-Involves a refactor or schema change
+- Has 3+ steps or involves an architectural decision
+- Touches naming conventions or data shapes in SPECS.md
+- Affects more than 3 files
+- Involves a refactor or schema change
 
 To activate: press Shift+Tab twice in Claude Code, or prefix your prompt with:
-"Before writing any code, enter Plan Mode and map out every file and function you'll touch. Present the plan and wait for my approval."
+"Before writing any code, enter Plan Mode and map out every file and function
+you'll touch. Present the plan and wait for my approval."
+
+Each planned task must be scoped to 2–5 minutes of execution time.
+If a task would take longer, break it into subtasks before starting.
+Include exact file paths in every task definition — no vague targets.
+
+If implementation diverges from the plan at any point, STOP and re-plan
+before continuing. Do not push through.
+
+## Test-Driven Development
+For any task that adds or changes behavior:
+1. Write the failing test FIRST. Run it. Confirm it fails (RED).
+2. Write the minimum code to make it pass. Run it. Confirm it passes (GREEN).
+3. Refactor if needed. Run again. Confirm still green (REFACTOR).
+
+If code was written before a test exists, delete it and restart from RED.
+"A test will be added later" is not acceptable — it does not count toward DoD.
+
+## Debugging Protocol
+When something is broken, do not guess. Run this sequence:
+
+1. **Reproduce** — Confirm the failure is consistent. Identify the exact command and output.
+2. **Isolate** — Narrow to the smallest possible failing case. Remove variables.
+3. **Hypothesize** — State one specific cause before touching any code.
+4. **Verify** — Write a test or assertion that confirms the hypothesis, then fix.
+
+Do not skip to step 4. Do not try multiple hypotheses simultaneously.
+If 3 cycles of this fail to resolve the issue: stop, surface the findings, ask for input.
 
 ## Failure Protocol
-
 If a task is not working after 2 attempts, STOP. Do not keep trying.
 
 Instead:
@@ -105,4 +142,15 @@ Do NOT:
   relevant SPECS section and those files loaded. Do not carry
   accumulated session context into implementation work.
 - Main session is for decisions and direction. Subagents are for execution.
-- Global memory lives in ~/.claude/memory/. MEMORY.md is the routing doc (cap at 200 lines). Detailed patterns → patterns.md, bugs → debugging.md, architecture decisions → architecture.md, workflow preferences → preferences.md.
+- Global memory lives in ~/.claude/memory/. MEMORY.md is the routing doc (cap at 200 lines).
+  Detailed patterns → patterns.md, bugs → debugging.md, architecture decisions →
+  architecture.md, workflow preferences → preferences.md.
+
+## Worktree Protocol
+- Never work directly on `main` or an existing feature branch.
+- Before starting any task on an established project, create a worktree:
+  `git worktree add ../[project]-[task-slug] -b [task-slug]`
+- Run all subagent work inside that worktree directory.
+- On task completion, merge or PR from the worktree branch, then prune:
+  `git worktree remove ../[project]-[task-slug]`
+- If a worktree already exists for this task, resume there — do not create a second one.
