@@ -54,6 +54,11 @@ Report the scores to me explicitly.
 - **Never trust LLM output for real-world facts** (graduated from Lesson 5, 4+ hallucination incidents).
   Any LLM-generated content about games, scores, dates, or events MUST be verified against
   an external API before displaying in the email. See .claude/SKILLS.md for guardrails.
+- **Always deploy AND lint before declaring done** (graduated from Lessons 2, 26, 30).
+  Git push is NOT deployment. After ANY code change: (1) run `ruff check` on changed files,
+  (2) SCP to `root@45.55.153.60:~/daily-email/`, (3) verify the server has the new code.
+  Three separate incidents where code was committed but not deployed, or deployed but would
+  have crashed at runtime. Measure twice, cut once.
 
 8) Prompt Formula (use for every non-trivial request)
 Structure requests as:
@@ -100,3 +105,4 @@ Do NOT:
   relevant SPECS section and those files loaded. Do not carry
   accumulated session context into implementation work.
 - Main session is for decisions and direction. Subagents are for execution.
+- Global memory lives in ~/.claude/memory/. MEMORY.md is the routing doc (cap at 200 lines). Detailed patterns → patterns.md, bugs → debugging.md, architecture decisions → architecture.md, workflow preferences → preferences.md.
