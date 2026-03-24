@@ -2,6 +2,13 @@
 name: sync
 description: End-of-session sync — saves state, lessons, and sets up tomorrow's cliffhanger
 ---
+Current branch and uncommitted state:
+!`git status --short 2>/dev/null || echo "(no git repo)"`
+
+Recent commits this session:
+!`git log --since="6 hours ago" --oneline 2>/dev/null || echo "(no recent commits)"`
+
+---
 
 We are finishing this session. Please perform a "Session Sync" to preserve our state:
 

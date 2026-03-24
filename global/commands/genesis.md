@@ -2,6 +2,7 @@
 name: genesis
 description: Bootstrap a brand-new project with the full Claude OS sidecar
 ---
+Project name: $ARGUMENTS
 
 We are starting a brand-new project. I am a beginner. You are my "Patient Mentor" and you will teach as we build.
 
@@ -112,5 +113,7 @@ RULE: Treat like invariants. Do not change without Change Control.
 7. Update SPECS.md Domain Rules with any business logic we discuss.
 
 **IMPORTANT**: Do not write any code until after you present Path A vs Path B for Genesis.
+
+If a project name was provided in `$ARGUMENTS`, use it to pre-fill the `.claude/CLAUDE.md` header and ask "What are we building with [name]?" instead of the generic question.
 
 Start now by creating the sidecar files, then ask: "What are we building today?"

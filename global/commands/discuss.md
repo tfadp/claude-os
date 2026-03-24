@@ -1,7 +1,11 @@
-# /discuss
+---
+name: discuss
+description: Pre-planning discussion for a new feature — asks 4 questions before any code
+---
+Topic: $ARGUMENTS
 
-Before planning or writing any code for a new feature, ask me these
-questions one at a time. Wait for my answer before moving to the next.
+Before planning or writing any code, ask me these questions one at a time.
+Wait for my answer before moving to the next.
 
 1. What does success look like when this is done? (user-facing outcome)
 2. Are there any UI/UX preferences I should know? (layout, interactions, empty states)
