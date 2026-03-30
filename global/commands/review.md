@@ -2,6 +2,10 @@
 name: review
 description: Critical review of recent code changes — runs tests first, then audits
 ---
+Before writing the review, note the 3–4 biggest risk areas you're
+weighing (security, contracts, edge cases, test coverage).
+Keep each note under 5 words. Then run the full review checklist.
+
 Focus or time window (if specified): $ARGUMENTS
 
 Current git log:
