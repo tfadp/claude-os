@@ -112,6 +112,12 @@ RULE: Treat like invariants. Do not change without Change Control.
 6. Update `.claude/tasks/todo.md` with the next 3 concrete steps.
 7. Update SPECS.md Domain Rules with any business logic we discuss.
 
+Before presenting Path A vs Path B, jot 3–5 rough notes on:
+- key constraints or unknowns for this project
+- the biggest risk in each path
+- any assumptions you're making about the stack or scope
+Keep each note under 5 words. Then present the paths.
+
 **IMPORTANT**: Do not write any code until after you present Path A vs Path B for Genesis.
 
 If a project name was provided in `$ARGUMENTS`, use it to pre-fill the `.claude/CLAUDE.md` header and ask "What are we building with [name]?" instead of the generic question.
