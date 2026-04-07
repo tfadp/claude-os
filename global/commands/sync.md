@@ -10,6 +10,12 @@ Recent commits this session:
 
 ---
 
+## Why This Matters
+Running /sync and ending the session is a token cost control measure. Leaving Claude Code 
+idle for 5+ minutes causes the prompt cache to expire. When you return, the full conversation 
+context is reprocessed from scratch at full price (~10x cost spike). Always /sync and close 
+rather than leaving a session idle.
+
 We are finishing this session. Please perform a "Session Sync" to preserve our state:
 
 1. **Update tasks/todo.md**: Mark everything we finished today as complete. Move any "In Progress" items to the top of the "Active Tasks" list.

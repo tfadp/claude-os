@@ -23,6 +23,7 @@ Run a trim audit on the files above. For each rule, preference, pattern, or log 
 3. **Duplicate?** Does another rule or entry already cover this?
 4. **Overconstrained?** Does this rule block reasonable behavior more often than it prevents real mistakes?
 5. **Graduated?** Was this a temporary lesson that is now obvious and no longer needs to be stated?
+6. **Tool/MCP audit**: List every MCP server and tool registered in `settings.json`. For each one: when was it last used this week? If it hasn't been used in 7+ days, flag it for removal with: `[TRIM CANDIDATE - tool: {name}]`
 
 For each candidate, output:
 - **Rule/entry** (quote it exactly)
