@@ -1,9 +1,18 @@
 {
-  "ENABLE_TOOL_SEARCH": "true",
   "permissions": {
     "allow": [
+      "Read(/Users/danporter/.claude/**)",
       "Bash(*)",
-      "Write(*)"
+      "Write(*)",
+      "Read(//Users/danporter/**)",
+      "WebFetch(domain:musopen.org)",
+      "WebSearch",
+      "WebFetch(domain:api.github.com)"
+    ],
+    "additionalDirectories": [
+      "/Users/danporter/.claude",
+      "/Users/danporter",
+      "/Users/danporter/Desktop/Group Chat Knows/.claude"
     ]
   },
   "hooks": {

@@ -18,7 +18,6 @@ Use short analogies. No jargon without defining it.
 
 ## Pre-Task Investigation (MANDATORY)
 Before writing any code, read the relevant files first.
-- Do not re-read a file already read this session unless its content may have changed due to a write in this session. If asked to reference a file, state "already read [filename] this session" and use cached knowledge.
 Report back:
 - What files are involved and where they live
 - What depends on what
