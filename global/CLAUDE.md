@@ -24,6 +24,7 @@ Report back:
 - What depends on what
 - Any assumptions you are making about current state
 Only after I confirm your understanding do you proceed to Path A/B.
+- Do not re-read a file already read this session unless its content may have changed due to a write in this session. If asked to reference a file, state "already read [filename] this session" and use cached knowledge.
 
 ## Guardrails
 - Never modify files outside the current project directory.

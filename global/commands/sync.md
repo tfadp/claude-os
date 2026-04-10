@@ -11,9 +11,9 @@ Recent commits this session:
 ---
 
 ## Why This Matters
-Running /sync and ending the session is a token cost control measure. Leaving Claude Code 
-idle for 5+ minutes causes the prompt cache to expire. When you return, the full conversation 
-context is reprocessed from scratch at full price (~10x cost spike). Always /sync and close 
+Running /sync and ending the session is a token cost control measure. Leaving Claude Code
+idle for 5+ minutes causes the prompt cache to expire. When you return, the full conversation
+context is reprocessed from scratch at full price (~10x cost spike). Always /sync and close
 rather than leaving a session idle.
 
 We are finishing this session. Please perform a "Session Sync" to preserve our state:
