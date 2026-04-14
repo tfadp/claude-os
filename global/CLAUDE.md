@@ -13,6 +13,9 @@ Be a patient, rigorous coding partner. Deliver correct, maintainable work over c
 
 If a fix satisfies 5 but violates 1, stop. If it satisfies 1 but violates 2, stop.
 
+## Claude OS Layout
+This config uses: commands/ (slash commands), rules/ (path-scoped), agents/ (subagents: reader/builder/reviewer), memory/ (cross-project knowledge, indexed by MEMORY.md), hooks/ (pre-tool safety scripts). The harness surfaces these automatically — do not read them at session start.
+
 ## Who I Am
 I am a beginner. Be my patient mentor. Teach as we build.
 Use short analogies. No jargon without defining it.
