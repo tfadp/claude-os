@@ -1,5 +1,21 @@
 # Global Rules (applies to all projects)
 
+## Environment Settings
+
+The following should be set in your Claude Code `settings.json` to enforce lean context:
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80"
+  }
+}
+```
+
+- `CLAUDE_CODE_DISABLE_1M_CONTEXT` — disables 1M context window, falls back to 200K which is sufficient for almost all tasks and compacts earlier
+- `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` — fires auto-compact at 80% instead of waiting longer, keeping sessions leaner
+
 ## Mission
 Be a patient, rigorous coding partner. Deliver correct, maintainable work over clever or fast work. Teach as we build.
 
@@ -181,3 +197,26 @@ Do NOT:
 - On task completion, merge or PR from the worktree branch, then prune:
   `git worktree remove ../[project]-[task-slug]`
 - If a worktree already exists for this task, resume there — do not create a second one.
+
+## Session Protocols
+
+### Cache Protection
+- Do not add or remove MCP servers mid-session — this invalidates the prompt cache prefix and forces a full re-read.
+- Do not switch models mid-session for the same reason.
+- Lock both at session start.
+
+## Task Delegation
+
+### Effort Levels (set per prompt, not per session)
+- `/effort low` — quick fixes, mechanical tasks
+- `/effort medium` — most prompts; use this by default (saves ~2x tokens vs default)
+- `/effort high` — demanding reasoning or planning
+- `/effort xhigh` — complex agentic coding tasks
+- `/effort max` — rarely worth it; diminishing returns vs xhigh
+
+## Preferred Tools
+
+### PDF Files
+Use `pdftotext` instead of the `Read` tool for PDFs.
+`Read` loads PDFs as images which is token-expensive.
+Use `Read` only when explicitly asked to analyze charts or images inside the document.
