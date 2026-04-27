@@ -1,4 +1,8 @@
 {
+  "env": {
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80"
+  },
   "permissions": {
     "allow": [
       "Read(/Users/danporter/.claude/**)",
@@ -7,12 +11,17 @@
       "Read(//Users/danporter/**)",
       "WebFetch(domain:musopen.org)",
       "WebSearch",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(cp ~/.claude/CLAUDE.md /Users/danporter/Desktop/claude-os/global/CLAUDE.md)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)"
     ],
     "additionalDirectories": [
       "/Users/danporter/.claude",
       "/Users/danporter",
-      "/Users/danporter/Desktop/Group Chat Knows/.claude"
+      "/Users/danporter/Desktop/Group Chat Knows/.claude",
+      "/Users/danporter/Desktop/Last Take Brand New/.claude"
     ]
   },
   "hooks": {
