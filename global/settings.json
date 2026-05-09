@@ -3,6 +3,7 @@
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
     "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80"
   },
+  "effortLevel": "medium",
   "permissions": {
     "allow": [
       "Read(/Users/danporter/.claude/**)",
@@ -15,7 +16,8 @@
       "Bash(cp ~/.claude/CLAUDE.md /Users/danporter/Desktop/claude-os/global/CLAUDE.md)",
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ],
     "additionalDirectories": [
       "/Users/danporter/.claude",
@@ -45,6 +47,36 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/secrets-scanner.sh \"$CLAUDE_TOOL_INPUT_CONTENT\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-logger.sh SessionStart"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-logger.sh SessionEnd"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-logger.sh PreCompact"
           }
         ]
       }
