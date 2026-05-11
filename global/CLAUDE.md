@@ -189,6 +189,28 @@ Do NOT:
   Detailed patterns → patterns.md, bugs → debugging.md, architecture decisions →
   architecture.md, workflow preferences → preferences.md.
 
+### Tool Output Truncation
+
+Bash and tool outputs over 200 lines must not enter context raw. Pipe to a tempfile
+under `/tmp/claude-session/` and keep only the head (20 lines), tail (20 lines), and
+exit code in context. Reference the tempfile path so it can be re-read on demand.
+
+Pattern:
+    command 2>&1 | tee /tmp/claude-session/$(date +%s)-$(basename_of_action).log
+
+After running, surface:
+- Exit code
+- First 20 lines (usually the command echo + early output)
+- Last 20 lines (usually the failure summary or success confirmation)
+- Tempfile path for full retrieval
+
+Exception: outputs that are themselves the deliverable (e.g., generated code,
+structured data the user asked for) bypass this rule. The rule targets diagnostic
+noise — test runs, lint output, build logs, search results, dependency installs.
+
+If a later step needs the full output, re-read the tempfile rather than re-running
+the command.
+
 ## Worktree Protocol
 - Never work directly on `main` or an existing feature branch.
 - Before starting any task on an established project, create a worktree:
